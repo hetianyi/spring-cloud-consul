@@ -70,7 +70,7 @@ public class ConsulServiceRegistry implements ServiceRegistry<ConsulRegistration
 			if (this.heartbeatProperties.isEnabled() && this.ttlScheduler != null
 					&& service.getCheck() != null
 					&& service.getCheck().getTtl() != null) {
-				this.ttlScheduler.add(reg.getInstanceId());
+				this.ttlScheduler.add(reg, this.properties);
 			}
 		}
 		catch (ConsulException e) {

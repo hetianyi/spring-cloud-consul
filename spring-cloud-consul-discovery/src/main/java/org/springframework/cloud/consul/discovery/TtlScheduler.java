@@ -26,6 +26,7 @@ import com.ecwid.consul.v1.agent.model.NewService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import org.springframework.cloud.consul.serviceregistry.ConsulRegistration;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.concurrent.ConcurrentTaskScheduler;
 
@@ -47,6 +48,10 @@ public class TtlScheduler {
 
 	private ConsulClient client;
 
+	private ConsulRegistration reg;
+
+	private ConsulDiscoveryProperties properties;
+
 	public TtlScheduler(HeartbeatProperties configuration, ConsulClient client) {
 		this.configuration = configuration;
 		this.client = client;
@@ -55,6 +60,12 @@ public class TtlScheduler {
 	@Deprecated
 	public void add(final NewService service) {
 		add(service.getId());
+	}
+
+	public void add(final ConsulRegistration reg, ConsulDiscoveryProperties properties) {
+		this.reg = reg;
+		this.properties = properties;
+		add(reg.getInstanceId());
 	}
 
 	/**
@@ -92,7 +103,18 @@ public class TtlScheduler {
 
 		@Override
 		public void run() {
-			TtlScheduler.this.client.agentCheckPass(this.checkId);
+			try {
+				TtlScheduler.this.client.agentCheckPass(this.checkId);
+			}
+			catch (Exception e) {
+				// re-register service.
+				TtlScheduler.this.client.agentServiceRegister(reg.getService(),
+						TtlScheduler.this.properties.getAclToken());
+				if (log.isDebugEnabled()) {
+					log.debug("Agent check failed for {}, re-registered" + this.checkId);
+				}
+				throw e;
+			}
 			if (log.isDebugEnabled()) {
 				log.debug("Sending consul heartbeat for: " + this.checkId);
 			}
