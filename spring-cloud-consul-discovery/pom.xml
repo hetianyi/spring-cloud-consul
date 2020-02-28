@@ -4,7 +4,7 @@
 
 	<groupId>com.github.hetianyi</groupId>
 	<artifactId>spring-cloud-consul-discovery</artifactId>
-  <version>2.2.1.RELEASE</version>
+  <version>2.2.2.RELEASE-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>Spring Cloud Consul Discovery</name>
 	<description>Spring Cloud Consul Discovery(Patch Version for service Re-Register by Jason He)</description>
@@ -37,7 +37,7 @@
 		<connection>scm:git:git@github.com:hetianyi/spring-cloud-consul.git</connection>
 		<developerConnection>scm:git:git@github.com:hetianyi/spring-cloud-consul.git</developerConnection>
 		<url>git@github.com:hetianyi/spring-cloud-consul.git</url>
-	  <tag>spring-cloud-consul-discovery-2.2.1.RELEASE</tag>
+	  <tag>HEAD</tag>
   </scm>
 
 	<dependencies>
