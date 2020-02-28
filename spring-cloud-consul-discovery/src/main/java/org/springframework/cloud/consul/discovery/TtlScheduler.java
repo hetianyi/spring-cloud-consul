@@ -107,13 +107,16 @@ public class TtlScheduler {
 				TtlScheduler.this.client.agentCheckPass(this.checkId);
 			}
 			catch (Exception e) {
-				// re-register service.
-				TtlScheduler.this.client.agentServiceRegister(reg.getService(),
-						TtlScheduler.this.properties.getAclToken());
-				if (log.isDebugEnabled()) {
-					log.debug("Agent check failed for " + this.checkId + ", re-registered");
+				// try to re-register service, this may fail again.
+				try {
+					TtlScheduler.this.client.agentServiceRegister(reg.getService(),
+							TtlScheduler.this.properties.getAclToken());
+					if (log.isDebugEnabled()) {
+						log.debug("Agent check failed for " + this.checkId + ", re-registered");
+					}
+				} finally {
+					throw e;
 				}
-				throw e;
 			}
 			if (log.isDebugEnabled()) {
 				log.debug("Sending consul heartbeat for: " + this.checkId);
