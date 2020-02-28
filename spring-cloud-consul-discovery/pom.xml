@@ -259,20 +259,6 @@
 			</plugin>
 
 		</plugins>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.springframework.boot</groupId>
-					<artifactId>spring-boot-maven-plugin</artifactId>
-				</plugin>
-				<plugin>
-					<!-- dockerfile-maven-plugin -->
-					<groupId>com.spotify</groupId>
-					<artifactId>dockerfile-maven-plugin</artifactId>
-					<version>${docker-maven.version}</version>
-				</plugin>
-			</plugins>
-		</pluginManagement>
 	</build>
 
 	<distributionManagement>
