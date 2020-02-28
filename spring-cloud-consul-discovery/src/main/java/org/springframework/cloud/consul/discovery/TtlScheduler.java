@@ -112,9 +112,11 @@ public class TtlScheduler {
 					TtlScheduler.this.client.agentServiceRegister(reg.getService(),
 							TtlScheduler.this.properties.getAclToken());
 					if (log.isDebugEnabled()) {
-						log.debug("Agent check failed for " + this.checkId + ", re-registered");
+						log.debug("Agent check failed for " + this.checkId
+								+ ", re-registered");
 					}
-				} finally {
+				}
+				finally {
 					throw e;
 				}
 			}

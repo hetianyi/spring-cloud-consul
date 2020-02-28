@@ -4,6 +4,7 @@
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
+	<groupId>com.github.hetianyi</groupId>
 	<artifactId>spring-cloud-consul-discovery</artifactId>
 	<packaging>jar</packaging>
 	<name>Spring Cloud Consul Discovery</name>
@@ -13,7 +14,6 @@
 		<groupId>org.springframework.cloud</groupId>
 		<artifactId>spring-cloud-consul</artifactId>
 		<version>3.0.0.BUILD-SNAPSHOT</version>
-		<relativePath>..</relativePath>
 	</parent>
 
 	<developers>
